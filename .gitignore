@@ -1,0 +1,19 @@
+# IDE / User settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Generic Node (just in case files are dropped in root)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.vite/
+dist/
