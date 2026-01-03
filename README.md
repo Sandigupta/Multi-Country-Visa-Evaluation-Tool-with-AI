@@ -1,8 +1,34 @@
-# OpenSphere - AI-Powered Visa Evaluation Platform 🌍✈️
+# OpenSphere - AI-Powered Visa Evaluation Platform 
 
 **OpenSphere** is a sophisticated multi-country visa evaluation tool that combines **Rule-Based Logic** with **Generative AI (Google Gemini)** to provide personalized immigration advice. It helps users assess their eligibility for various visa types (e.g., German Opportunity Card, Canada Express Entry, US O-1) and provides a detailed, scored report.
 
 The platform also features a **Partner Dashboard** for immigration agencies to manage potential leads and track evaluations.
+
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/e21d060a-c2fd-4890-9029-a1e901d78220" width="100%" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/cc39de4a-403e-4608-80d0-5d7204f92ba5" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://github.com/user-attachments/assets/20f801b4-578a-4ab7-98b2-776073b28dd4" width="100%" />
+    </td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/5c4c1edc-6e1a-4cc7-9bee-25557dfd84a1" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="https://github.com/user-attachments/assets/69d3de41-4c7e-4568-a856-b4ea5ca7b51f" width="60%" />
+    </td>
+  </tr>
+</table>
+
+
 
 ---
 
