@@ -32,12 +32,12 @@ export default function EvaluationResultPage() {
             const realResultEncoded = localStorage.getItem("realEvaluationResult");
 
             if (realResultEncoded) {
-                console.log("Using Real API Result");
+                // console.log("Using Real API Result");
                 const realResult = JSON.parse(realResultEncoded);
                 setResult(realResult);
             } else {
                 // Fallback to mock if no real result found (legacy/dev support)
-                console.log("Using Mock Engine");
+                // console.log("Using Mock Engine");
                 const mockResult = generateMockEvaluation(data.visaType, data.country);
                 setResult(mockResult);
             }

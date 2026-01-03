@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Plus, Users, ArrowRight } from "lucide-react";
 import { CreatePartnerModal } from "./CreatePartnerModal";
+import { API_BASE_URL } from "../../config";
 
 interface Partner {
     _id: string;
@@ -22,7 +23,7 @@ export default function PartnerListPage() {
     const fetchPartners = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch("http://localhost:5000/api/partners");
+            const response = await fetch(`${API_BASE_URL}/api/partners`);
             if (response.ok) {
                 const data = await response.json();
                 setPartners(data);

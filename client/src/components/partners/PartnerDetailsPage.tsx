@@ -3,8 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Select } from "../ui/select";
+// import { Select } from "../ui/select";
 import { ArrowLeft, Filter, Calendar } from "lucide-react";
+import { API_BASE_URL } from "../../config";
 
 interface Evaluation {
     _id: string;
@@ -56,7 +57,7 @@ export default function PartnerDetailsPage() {
             if (filterCountry && filterCountry !== "All") params.append("country", filterCountry);
             if (debouncedSearch) params.append("search", debouncedSearch);
 
-            const response = await fetch(`http://localhost:5000/api/partners/${id}/leads?${params}`);
+            const response = await fetch(`${API_BASE_URL}/api/partners/${id}/leads?${params}`);
             if (response.ok) {
                 const data = await response.json();
                 setPartner(data.partner);

@@ -3,6 +3,7 @@ import { Modal } from "../ui/modal";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Copy, Check, ShieldAlert } from "lucide-react";
+import { API_BASE_URL } from "../../config";
 
 interface CreatePartnerModalProps {
     isOpen: boolean;
@@ -20,7 +21,7 @@ export const CreatePartnerModal = ({ isOpen, onClose, onPartnerCreated }: Create
         e.preventDefault();
         setIsLoading(true);
         try {
-            const response = await fetch("http://localhost:5000/api/partners", {
+            const response = await fetch(`${API_BASE_URL}/api/partners`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name }),

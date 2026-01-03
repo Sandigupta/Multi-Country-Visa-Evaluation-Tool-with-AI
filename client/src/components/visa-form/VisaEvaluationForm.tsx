@@ -8,6 +8,7 @@ import { Textarea } from "../ui/textarea";
 import { Dropzone } from "../file-upload/Dropzone";
 import { FileList } from "../file-upload/FileList";
 import { Mail, CheckCircle2 } from "lucide-react";
+import { API_BASE_URL } from "../../config";
 
 // Mock Data
 const VISA_OPTIONS: Record<string, string[]> = {
@@ -58,7 +59,7 @@ export default function VisaEvaluationForm() {
             });
 
             // Call Real API
-            const response = await fetch("http://localhost:5000/api/evaluate", {
+            const response = await fetch(`${API_BASE_URL}/api/evaluate`, {
                 method: "POST",
                 body: uploadData,
             });
