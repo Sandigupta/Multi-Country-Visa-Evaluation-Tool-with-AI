@@ -1,73 +1,174 @@
-# React + TypeScript + Vite
+# OpenSphere - AI-Powered Visa Evaluation Platform 🌍✈️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**OpenSphere** is a sophisticated multi-country visa evaluation tool that combines **Rule-Based Logic** with **Generative AI (Google Gemini)** to provide personalized immigration advice. It helps users assess their eligibility for various visa types (e.g., German Opportunity Card, Canada Express Entry, US O-1) and provides a detailed, scored report.
 
-Currently, two official plugins are available:
+The platform also features a **Partner Dashboard** for immigration agencies to manage potential leads and track evaluations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🌟 For Candidates
+*   **Multi-Country Support:** Evaluate eligibility for Germany, Canada, USA, Australia, and more.
+*   **Hybrid Evaluation Engine:**
+    *   **Rule Engine:** deterministic checks for hard requirements (age, degree, funds).
+    *   **Gemini AI:** semantic analysis of resumes and deeper qualitative insights.
+*   **Smart Scoring:** 0-100 probability score with a visual gauge.
+*   **Instant Reports:** Downloadable PDF reports with actionable feedback.
+*   **Resume Parsing:** Text extraction and analysis from uploaded CVs.
 
-## Expanding the ESLint configuration
+### 🤝 For Partners & Admins
+*   **Partner Dashboard:** View submitted leads and their evaluation results.
+*   **Lead Filtering:** Advanced search by candidate name, country, visa type, and score.
+*   **API Integration:** Partners can submit leads programmatically via API keys.
+*   **Secure Access:** API Key authentication for partner endpoints.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Technology Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Component | Tech |
+| :--- | :--- |
+| **Frontend** | React (Vite), TypeScript, Tailwind CSS, Shadcn/UI, Lucide Icons |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB (Mongoose ODM) |
+| **AI / ML** | Google Gemini 1.5 Flash (Generative AI) |
+| **Tools** | PDF generation (jspdf), Recharts (Charts) |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🏗️ Architecture & Flow
+
+The system follows a separated **Client-Server** architecture.
+
+```text
+    User / Candidate               Partner Agency              External Partner System
+           |                             |                               |
+           | Fills Form                  | Views Dashboard               | Submits Lead
+           | / Uploads CV                |                               | via API
+           v                             v                               v
+ +----------------------------------------------------------------------------------+
+ |                                  React Client                                    |
+ +----------------------------------------------------------------------------------+
+                                         |
+                                         | REST API Requests
+                                         v
+ +----------------------------------------------------------------------------------+
+ |                              Node/Express Server                                 |
+ +----------------------------------------------------------------------------------+
+          |                              |                           |
+          | Store Data                   | Auth & Validation         | Analyze
+          v                              v                           v
+  +---------------+              +--------------+         +-----------------------+
+  |    MongoDB    |              |  Middleware  |         | Evaluation Orchestrator|
+  +---------------+              +--------------+         +-----------------------+
+                                                                     |
+                                                 +-------------------+-------------------+
+                                                 |                                       |
+                                           Hard Checks                          Qualitative Analysis
+                                                 |                                       |
+                                                 v                                       v
+                                         +-------------+                         +-------------------+
+                                         | Rule Engine |                         | Gemini AI Service |
+                                         +-------------+                         +-------------------+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📂 Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The project is divided into two main directories:
+
 ```
+Openspeare/
+├── client/                 # Frontend Application (React + Vite)
+│   ├── src/
+│   │   ├── components/     # UI Components (Forms, Dashboard, Results)
+│   │   ├── services/       # API integration logic
+│   │   └── lib/            # Utilities (Mock engine, helpers)
+│   └── vite.config.ts
+│
+├── server/                 # Backend API (Node.js + Express)
+│   ├── config/             # Database connection
+│   ├── models/             # Mongoose Schemas (User, Country, Partner)
+│   ├── routes/             # API Endpoints
+│   ├── controllers/        # Business Logic
+│   ├── services/           # AI & Rule Services
+│   └── scripts/            # Setup & Seeding scripts
+│
+└── README.md
+```
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+*   **Node.js** (v18+)
+*   **MongoDB** (Local or Atlas URI)
+*   **Google Gemini API Key**
+
+### 1️⃣ Server Setup (Backend)
+
+1.  Navigate to the server directory:
+    ```bash
+    cd server
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Configure Environment Variables:
+    Create a `.env` file in `server/` with:
+    ```ini
+    PORT=5000
+    MONGODB_URI=your_mongodb_connection_string
+    GOOGLE_API_KEY=your_gemini_api_key
+    ```
+4.  **Seed Database** (Initial Data):
+    ```bash
+    # Populates Countries, Visas, and Demo Partner data
+    node scripts/seed.js
+    node scripts/ensure_partner_exists.js
+    ```
+5.  Start the Server:
+    ```bash
+    npm run dev
+    # Running on http://localhost:5000
+    ```
+
+### 2️⃣ Client Setup (Frontend)
+
+1.  Open a new terminal and navigate to the client directory:
+    ```bash
+    cd client
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the Development Server:
+    ```bash
+    npm run dev
+    # Running on http://localhost:5173
+    ```
+
+---
+
+## 📚 API Guidelines (For Developers)
+
+### `POST /api/evaluate`
+Submit a candidate application for evaluation.
+*   **Headers:** `Content-Type: multipart/form-data`
+*   **Body:** `resume` (file), `visaType` (string), `country` (string), `email` (string)
+*   **Optional:** `x-api-key` header (for Partner attribution).
+
+### `GET /api/partners/:id/leads`
+Fetch leads for a specific partner (Admin/Dashboard usage).
+*   **Query Params:** `country` (filter), `search` (Universal search for name/email/visa).
+
+---
+
+## 🔒 Security Note
+*   **API Keys** are used to track partner submissions.
+*   **Remote Database:** The project is configured to use a remote MongoDB cluster in production. Ensure your IP is whitelisted if connecting from a local machine.
